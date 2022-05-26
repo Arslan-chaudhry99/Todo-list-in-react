@@ -1,3 +1,4 @@
+import { getAllByPlaceholderText } from '@testing-library/react'
 import React, { useEffect, useState } from 'react'
 import "./todo.css"
 export const Todolist = () => {
@@ -14,6 +15,8 @@ export const Todolist = () => {
   const [Items, setItemsData ]= useState(getloclDta())
   const [editItems, seteditItems]= useState('')
   const[togleButton, settogleButton]=useState(false)
+  const[lastUpdate, setlastUpdate]=useState('')
+ 
   const addTo=()=>{
   if(!inputdata){
   alert('please add items')
@@ -67,29 +70,40 @@ let editItem=(index)=>{
 }
 useEffect(()=>{
   localStorage.setItem ("todo", JSON.stringify(Items))
+ 
 },[Items]);
 
 // checkList
-
+let length=Items.length
+// last update
+const lastUp=()=>{
+  const dateAndTime = new Date();
+let txt = dateAndTime.toLocaleString();
+setlastUpdate(txt);
+}
+setInterval(lastUp, 1000);
   return (
     <>
 
 <div className="main-div">
         <div className="child-div">
+        <h1 className='length-1 '>Curent Time  {lastUpdate}</h1>
+      <button className='btn task'> You Add {length} Task </button>
+         
           <figure>
-            <img src="./images/todo.svg" alt="todologo" />
+            
             <figcaption>Let's write</figcaption>
           </figure>
           <div className="addItems">
             <input
               type="text"
               placeholder=" Add Item"
-              className="form-control"
+              className="form-control "
              value={inputdata}
              onChange={(element)=>setInputdata(element.target.value)}
              
             />
-         {   togleButton ? <i className=" far fa-solid fa-edit add-btn" onClick={addTo}></i> :<i className=" fa fa-solid fa-plus add-btn" onClick={addTo}></i>
+         {   togleButton ? <i className=" far fa-solid fa-edit add-btn" onClick={addTo}></i> :<i className=" fa fa-solid fa-plus add-btn task-1" onClick={addTo}></i>
          }
           </div>
           
@@ -125,7 +139,7 @@ useEffect(()=>{
           {/* rmeove all button  */}
           <div className="showItems">
             <button
-              className="btn "
+              className="btn task "
               
               onClick={remAll}
               >
