@@ -15,25 +15,20 @@ export const Todolist = () => {
   const [Items, setItemsData ]= useState(getloclDta())
   const [editItems, seteditItems]= useState('')
   const[togleButton, settogleButton]=useState(false)
-  const[lastUpdate, setlastUpdate]=useState('')
  
   const addTo=()=>{
-  if(!inputdata){
+// Add data to todo
+if(!inputdata){
   alert('please add items')
-   }
-  else if(inputdata && togleButton){
-    setItemsData(
+}
+else if(inputdata && togleButton){
+setItemsData(
 Items.map((curntEl)=>{
 if(curntEl.id === editItems){
   return {...curntEl, name:inputdata}
-  
-
 }
 return curntEl
-
-})
-
-    );
+}));
     setInputdata("");
     seteditItems(null);
     settogleButton(false);
@@ -75,24 +70,18 @@ useEffect(()=>{
 
 // checkList
 let length=Items.length
-// last update
-const lastUp=()=>{
-  const dateAndTime = new Date();
-let txt = dateAndTime.toLocaleString();
-setlastUpdate(txt);
-}
-setInterval(lastUp, 1000);
+// for type writer
   return (
     <>
 
 <div className="main-div">
         <div className="child-div">
-        <h1 className='length-1 '>Curent Time  {lastUpdate}</h1>
-      <button className='btn task'> You Add {length} Task </button>
+        
+      <span className='tasklength'> You Add {length} Task </span>
          
           <figure>
             
-            <figcaption>Let's write</figcaption>
+            <figcaption>Let's write your tasks</figcaption>
           </figure>
           <div className="addItems">
             <input

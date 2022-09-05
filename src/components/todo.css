@@ -261,3 +261,8 @@ input:focus {
   box-shadow: 1px 1px 4px  black ;
 color: red;
 }
+.tasklength{
+  font-size: 20px;
+  color: white;
+  font-weight: 900;
+}
